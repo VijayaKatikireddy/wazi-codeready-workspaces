@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2019 Red Hat, Inc.
+# Copyright (c) 2018-2020 Red Hat, Inc.
 # Copyright IBM Corporation 2020
 # This program and the accompanying materials are made
 # available under the terms of the Eclipse Public License 2.0
@@ -75,19 +75,33 @@ CMD tail -f /dev/null
 # https://access.redhat.com/containers/?tab=tags#/registry.access.redhat.com/rhscl/httpd-24-rhel7
 FROM registry.access.redhat.com/rhscl/httpd-24-rhel7:2.4-119 AS registry
 
-ENV PRODUCT="IBM Wazi for CodeReady Workspaces Development Client" \
+ENV PRODUCT="IBM Wazi Developer for Red Hat CodeReady Workspaces" \
     COMPANY="IBM" \
     VERSION="1.1.0" \
     RELEASE="1" \
-    SUMMARY="IBM Wazi for CodeReady Workspaces Development Client - Devfile" \
-    DESCRIPTION="IBM Wazi for CodeReady Workspaces Development Client - Devfile Registry"
-
-LABEL name="$COMPANY-$PRODUCT" \
+    SUMMARY="IBM Wazi Developer for Workspaces" \
+    DESCRIPTION="IBM Wazi Developer for Red Hat CodeReady Workspaces - Devfile" \
+    PRODTAG="wazi-code-dev-file" \
+    PRODID="9d41d2d8126f4200b62ba1acc0dffa2e" \
+    PRODMETRIC="VIRTUAL_PROCESSOR_CORE" \
+    PRODCHARGEDCONTAINERS="All"
+        
+LABEL name="$PRODUCT" \
       vendor="$COMPANY" \
       version="$VERSION" \
       release="$RELEASE" \
       summary="$SUMMARY" \
-      description="$DESCRIPTION"
+      description="$DESCRIPTION" \
+      io.k8s.description="$DESCRIPTION" \
+      io.k8s.display-name="$SUMMARY" \
+      io.openshift.tags="$PRODTAG,$COMPANY" \
+      com.redhat.component="$PRODTAG" \
+      io.openshift.expose-services="" \
+      productID="$PRODID" \
+      productName="$PRODUCT" \
+      productMetric="$PRODMETRIC" \
+      productChargedContainers="$PRODCHARGEDCONTAINERS" \
+      productVersion="$VERSION"
       
 # DOWNSTREAM: use RHEL8/httpd
 # https://access.redhat.com/containers/?tab=tags#/registry.access.redhat.com/rhel8/httpd-24
@@ -97,7 +111,7 @@ USER 0
 # latest httpd container doesn't include ssl cert, so generate one
 RUN chmod +x /usr/share/container-scripts/httpd/pre-init/40-ssl-certs.sh && \
     /usr/share/container-scripts/httpd/pre-init/40-ssl-certs.sh
-RUN yum update -y gnutls systemd dbus && yum clean all && rm -rf /var/cache/yum && \
+RUN yum update -y gnutls systemd dbus libssh2 glibc nss expat libcom_err libcroco curl python cpio openldap libxml2 libxslt glib2 && yum clean all && rm -rf /var/cache/yum && \
     echo "Installed Packages" && rpm -qa | sort -V && echo "End Of Installed Packages"
 # Fix for htaccess from VA Scan
 RUN echo "<FilesMatch "\""^\\.ht"\"">" >> /etc/httpd/conf/httpd.conf && \
