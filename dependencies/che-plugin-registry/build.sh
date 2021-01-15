@@ -85,8 +85,8 @@ function parse_arguments() {
 
 parse_arguments "$@"
 
-# mkdir v3/plugins/ibm/dbbvscode/1.5.7/extensions/
-# cp db2forzosdeveloperextension*.vsix v3/plugins/ibm/dbbvscode/1.5.7/extensions/
+mkdir v3/plugins/ibm/wazi-dbb/1.1.0/extensions/
+cp db2forzosdeveloperextension*.vsix v3/plugins/ibm/wazi-dbb/1.1.0/extensions/
 
 IMAGE="${REGISTRY}/${ORGANIZATION}/che-plugin-registry:${TAG}"
 VERSION=$(head -n 1 VERSION)
