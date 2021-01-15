@@ -21,6 +21,9 @@ readarray -d '' metas < <(find "$1" -name 'meta.yaml' -print0)
 for meta in "${metas[@]}"; do
     plugin_id=$(evaluate_plugin_id "$meta")
     expected_path="$1/plugins/${plugin_id}/meta.yaml"
+      echo "'${plugin_id}':"
+      echo "'${expected_path}'"
+      echo "'${meta}' "
     if [[ "${expected_path}" != "${meta}" ]]; then
       echo "!!! Location mismatch in plugin '${plugin_id}':"
       echo "!!!   Expected location: '${expected_path}'"

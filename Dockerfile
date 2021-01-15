@@ -29,8 +29,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 COPY assembly/codeready-workspaces-assembly-main/target/codeready-workspaces-assembly-main.tar.gz /tmp/codeready-workspaces-assembly-main.tar.gz
 RUN tar xzf /tmp/codeready-workspaces-assembly-main.tar.gz --transform="s#.*codeready-workspaces-assembly-main/*##" -C /home/user/codeready && rm -f /tmp/codeready-workspaces-assembly-main.tar.gz
 
-COPY db2forzosdeveloperextension*.vsix extension/plugins/ibm/db2forzosdeveloperextension-0.5.7/0.5.7/extensions/
-
 # this should fail if the startup script is not found in correct path /home/user/codeready/tomcat/bin/catalina.sh
 RUN mkdir /logs /data && \
     chmod 0777 /logs /data && \
