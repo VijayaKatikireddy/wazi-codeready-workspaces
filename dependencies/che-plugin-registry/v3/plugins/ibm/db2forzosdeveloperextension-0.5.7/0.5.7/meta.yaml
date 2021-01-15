@@ -1,0 +1,17 @@
+# Use, duplication or disclosure restricted by GSA ADP Schedule
+# Contract with IBM Corp.
+
+apiVersion: v2
+publisher: ibm
+name: db2forzosdeveloperextension-0.5.7
+version: 0.5.7
+type: VS Code extension
+displayName: IBM Db2 for z/OS Developer extension
+title: IBM Db2 Developer Extension
+description: This VS Code extension provides support for Db2 for z/OS 
+category: Language
+firstPublicationDate: "2020-07-28"
+spec:
+  extensions:
+  - relative:extension/plugins/ibm/db2forzosdeveloperextension-0.5.7/0.5.7/extensions/db2forzosdeveloperextension-0.5.7.vsix
+  
