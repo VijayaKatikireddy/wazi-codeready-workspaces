@@ -24,7 +24,7 @@ RUN microdnf install java-11-openjdk-headless tar gzip shadow-utils findutils &&
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-COPY b2jcc_license_cisuz.jar /b2jcc_license_cisuz.jar
+COPY db2jcc_license_cisuz.jar /db2jcc_license_cisuz.jar
 
 # NOTE: if built in Brew, use get-sources-jenkins.sh to pull latest
 COPY assembly/codeready-workspaces-assembly-main/target/codeready-workspaces-assembly-main.tar.gz /tmp/codeready-workspaces-assembly-main.tar.gz
